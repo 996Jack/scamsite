@@ -1,0 +1,31 @@
+var MYCALL = MYCALL || (function(){
+    var params = {}; // private
+    return {
+        init : function(Args) {
+    	    //console.log(Args[1]);
+            params = Args[0];
+            pub = Args[1];
+            domain = Args[2];
+            // some other initialising
+        },
+        send : function() {
+          var script = document.createElement("script");
+          script.type = "text/javascript";
+          script.src = "https://trk-aliquando.com/scripts/push/v9e118mez8";
+          script.onload = function () {
+            push_init();
+            var utmObj = {
+              "utm_source": pub,
+              "utm_campaign": domain,
+              "source_two": params,
+              "source_one": 0
+            }
+            setUtm(utmObj);
+//            alert('sending: '+params);
+            push_subscribe();
+          };
+          document.getElementsByTagName("head")[0].appendChild(script);
+        }
+    };
+}());
+
